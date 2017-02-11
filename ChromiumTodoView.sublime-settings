@@ -1,0 +1,12 @@
+{
+    // Location of your depot_tools directory
+    "depot_tools": "",
+
+    // Location of the python version to use. Typically this is the python bin
+    // that came with depot_tools
+    "python_cmd": "",
+
+    // This is the bug tracker to use.  Issues numbers will be appended to this
+    // string
+    "bug_tracker": "https://crbug.com/"
+}
