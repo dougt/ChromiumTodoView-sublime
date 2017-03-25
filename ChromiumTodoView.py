@@ -16,19 +16,41 @@ class ChromiumTodoViewHandler(sublime_plugin.EventListener):
       self._todo_regex = re.compile('.+TODO\(([0-9]+)\):.*')
       self.SETTINGS_FILE = "ChromiumTodoView.sublime-settings"
       self.load_settings()
-
-    def check_setting(self, value):
-      self.settings.add_on_change(value, self.load_settings)
-      if self.settings.get(value) == None:
-        print("ChromiumTodoView: " + value + " is not set in " + self.SETTINGS_FILE)
-        sublime.status_message("ChromiumTodoView not loaded.")
-        return
+      self.settings.add_on_change("depot_tools", self.load_settings)
+      self.settings.add_on_change("python_cmd", self.load_settings)
+      self.settings.add_on_change("bug_tracker", self.load_settings)
 
     def load_settings(self):
       self.settings = sublime.load_settings(self.SETTINGS_FILE)
-      self.check_setting("depot_tools")
-      self.check_setting("python_cmd")
-      self.check_setting("bug_tracker")
+
+      depot_tools = self.settings.get("depot_tools")
+      if depot_tools == None:
+        print("ChromiumTodoView: 'depot_tools' is not set in your settings.")
+        sublime.status_message("ChromiumTodoView not loaded.")
+        return
+
+      if os.path.isdir(depot_tools) == False:
+        print("ChromiumTodoView: Setting 'depot_tools' is not a directory. Please update your settings.")
+        sublime.status_message("ChromiumTodoView not loaded.")
+        return
+
+      python_cmd = self.settings.get("python_cmd")
+      if python_cmd == None:
+        print("ChromiumTodoView: 'python_cmd' is not set in your settings.")
+        sublime.status_message("ChromiumTodoView not loaded.")
+        return
+
+      python_path = os.path.join(depot_tools, python_cmd)
+      if os.path.exists(python_path) == False:
+        print("ChromiumTodoView: Location of python is not found. Please update your settings.")
+        print("                  {depot_tools}/{python_cmd} must exist.")
+        sublime.status_message("ChromiumTodoView not loaded.")
+
+      bug_tracker = self.settings.get("bug_tracker")
+      if bug_tracker == None:
+        print("ChromiumTodoView: 'bug_tracker' is not set in your settings.")
+        sublime.status_message("ChromiumTodoView not loaded.")
+        return
 
     def on_hover(self, view, point, hover_zone):
         sublime.set_timeout_async(lambda: self.on_hover_async(view, point, hover_zone))
