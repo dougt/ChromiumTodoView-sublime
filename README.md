@@ -14,6 +14,7 @@ Installation
 or
 
 * clone this repo into your Sublime Text 3 `Packages` directory
+* copy "ChromiumTodoView.sublime-settings" into `Packages\User` directory
 
 Settings
 ------------

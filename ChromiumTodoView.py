@@ -20,7 +20,8 @@ class ChromiumTodoViewHandler(sublime_plugin.EventListener):
     def check_setting(self, value):
       self.settings.add_on_change(value, self.load_settings)
       if self.settings.get(value) == None:
-        sublime.status_message("ChromiumTodoView: " + value + " is not set in " + self.SETTINGS_FILE)
+        print("ChromiumTodoView: " + value + " is not set in " + self.SETTINGS_FILE)
+        sublime.status_message("ChromiumTodoView not loaded.")
         return
 
     def load_settings(self):
@@ -28,7 +29,7 @@ class ChromiumTodoViewHandler(sublime_plugin.EventListener):
       self.check_setting("depot_tools")
       self.check_setting("python_cmd")
       self.check_setting("bug_tracker")
-    
+
     def on_hover(self, view, point, hover_zone):
         sublime.set_timeout_async(lambda: self.on_hover_async(view, point, hover_zone))
 
