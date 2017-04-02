@@ -1,0 +1,31 @@
+[
+    {
+        "id": "preferences",
+        "children":
+        [
+            {
+                "caption": "Package Settings",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "ChromiumTodoView",
+                        "children":
+                        [
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/ChromiumTodoView/ChromiumTodoView.sublime-settings"},
+                                "caption": "ChromiumTodoView Settings – Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/User/ChromiumTodoView.sublime-settings"},
+                                "caption": "ChromiumTodoView Settings – User"
+                            },
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
