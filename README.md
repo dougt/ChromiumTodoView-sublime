@@ -23,3 +23,10 @@ Two settings are required to change before ChromiumTodoView works:
 
 - **depot_tools** is the [depot_tools](https://dev.chromium.org/developers/how-tos/install-depot-tools) directory.
 - **python_cmd** is the name of the python bin.  On linux, the value is probably just "python".  On windows, it will be "python276_bin/python.exe".
+
+Auth
+------------
+
+Be sure to remember to auth:
+
+depot-tools-auth auth bugs.chromium.org
